@@ -1,3 +1,4 @@
+
 /* 
  * guess6.c - a C version of our simple bash demo program guess1
  *  (we use readLine() to improve input checking)
@@ -29,7 +30,7 @@ main(const int argc, const char * argv[])
   int answer; // the secret number to guess
   int guess;  // the user's guess
   int max;    // we'll pick a number in [1..max]
-
+  int numGuesses = 0;
   // interpret arguments
   if (argc == 1) {
     // no arguments (other than the command) - use default value
@@ -51,7 +52,7 @@ main(const int argc, const char * argv[])
   printf("I'm thinking of a number between 1-%d.\n", max);
   guess = askGuess(1, max);
 
-  while (guess != 0 && guess != answer) {
+  while (guess != 0 && guess != answer && numGuesses < 9) {
     if (guess < 0) {
       printf("invalid number!\n");
     } else if (guess > answer) {
@@ -59,11 +60,15 @@ main(const int argc, const char * argv[])
     } else {
       printf("too low!\n");
     }
+    numGuesses++;
+    printf("Number of guesses left: %d\n", 10-numGuesses);
     guess = askGuess(1, max);
   }
 
   if (guess == answer)
     printf("Correct!\n");
+  else if (numGuesses == 10)
+    printf("Out of guesses! The correct answer was %d\n", answer);
   else
     printf("The answer was %d\n", answer);
 
