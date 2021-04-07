@@ -67,7 +67,7 @@ main(const int argc, const char * argv[])
 
   if (guess == answer)
     printf("Correct!\n");
-  else if (numGuesses == 10)
+  else if (numGuesses == 9)
     printf("Out of guesses! The correct answer was %d\n", answer);
   else
     printf("The answer was %d\n", answer);
